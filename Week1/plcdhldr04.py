@@ -1,29 +1,39 @@
-'''student no claaass'''
-def datadisplay():
-    'i DO believe that theres an easier wya but im too lazy (or just brain damaged to do it)'
-    name = input()
-    sex = input()
-    age = input()
-    student_id = input()
-    gpa = input()
+class Elevator:
+    def __init__(self, max_floor):
+        # Initialize the elevator with the current floor and max floor
+        self.current_floor = 1
+        self.max_floor = max_floor
 
-    #decides title based on age
-    if sex in 'Male':
-        sex = 'Mr'
-    else:
-        sex = "Miss"
+    def go_to_floor(self, floor):
+        # If the requested floor is valid, update the current floor
+        if 1 <= floor <= self.max_floor:
+            self.current_floor = floor
+        else:
+            print("Invalid Floor")
 
-    return f"{sex} {name} ({age}) ID: {student_id} GPA {gpa}"
+    def report_current_floor(self):
+        # Print the current floor of the elevator
+        print(f"Current floor: {self.current_floor}")
 
 
+# Read input from the user
+max_floor = int(input())  # First line: the number of floors in the building
+elevator = Elevator(max_floor)  # Initialize the elevator
 
-DATA = []
-PLCHLDR = 0
-while PLCHLDR < 3:
-    DATA.append(datadisplay())
-    PLCHLDR += 1
+while True:
+    user_input = input()  # Read next input
 
-#search function
-SEARCHNUM = input()
-print(DATA.find(SEARCHNUM))
+    if user_input == "Done":
+        # If the user types 'Done', break the loop
+        break
 
+    try:
+        # Convert the input to an integer and move the elevator
+        floor = int(user_input)
+        elevator.go_to_floor(floor)
+    except ValueError:
+        # If the input is not a number or 'Done', we skip it (ignore invalid input)
+        print("Invalid input. Please enter a valid floor number or 'Done'.")
+
+# After the loop ends, report the current floor of the elevator
+elevator.report_current_floor()
